@@ -65,16 +65,16 @@ export function AiAnalysisScreen({
     return clearTimers;
   }, [phase, reduce]);
 
-  // Match Found → Console directly (no fade that reveals assessment)
+  // Match Found → Console after 5 seconds
   useEffect(() => {
     if (phase !== "success") return;
 
     const doneId = window.setTimeout(() => {
       onCompleteRef.current();
-    }, reduce ? 800 : 1200);
+    }, 5000);
 
     return () => window.clearTimeout(doneId);
-  }, [phase, reduce]);
+  }, [phase]);
 
   return (
     <motion.div
@@ -122,7 +122,7 @@ export function AiAnalysisScreen({
 
                 <div className="relative flex items-end justify-between gap-3">
                   <div className="min-w-0">
-                    <h2 className="text-[17px] font-bold tracking-tight text-[#0F172A] sm:text-[19px]">
+                    <h2 className="text-[15px] font-bold uppercase tracking-[0.12em] text-[#0F172A] sm:text-[17px]">
                       Analysis Progress
                     </h2>
                   </div>

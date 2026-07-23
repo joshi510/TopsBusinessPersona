@@ -4,26 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { List, X } from "@phosphor-icons/react";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { List } from "@phosphor-icons/react";
 import { fadeDown } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-
-const navLinks = [
-  { href: "/#assessment", label: "Assessment" },
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#ai-employees", label: "AI Employees" },
-  { href: "/#industries", label: "Industries" },
-  { href: "/#about", label: "About" },
-];
 
 export function Navbar({
   title,
@@ -31,7 +14,6 @@ export function Navbar({
   title?: string;
 } = {}) {
   const reduce = useReducedMotion();
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -65,24 +47,6 @@ export function Navbar({
           />
         </Link>
 
-        {/* Desktop / large tablet links */}
-        {!title ? (
-          <nav
-            className="hidden min-w-0 flex-1 items-center justify-center gap-1 lg:flex xl:gap-2"
-            aria-label="Primary"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-full px-3 py-2 text-[13px] font-semibold text-slate-600 transition hover:bg-[#49A5FF]/10 hover:text-[#1F7DD9] xl:px-3.5 xl:text-[14px]"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        ) : null}
-
         <div className="flex shrink-0 items-center gap-2.5 sm:gap-4">
           {title ? (
             <span className="max-w-[52vw] truncate text-right text-[13px] font-semibold text-[#174D8C] sm:max-w-none sm:whitespace-nowrap sm:text-[15px]">
@@ -90,51 +54,13 @@ export function Navbar({
             </span>
           ) : null}
 
-          {/* Mobile + tablet menu (hidden when desktop links show) */}
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <button
-                type="button"
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200/80 bg-white/80 text-[#174D8C] shadow-sm backdrop-blur-md transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1F7DD9] lg:hidden"
-                aria-label={open ? "Close menu" : "Open menu"}
-              >
-                {open ? <X size={22} weight="bold" /> : <List size={22} weight="bold" />}
-              </button>
-            </SheetTrigger>
-
-            <SheetContent side="right" className="gap-0 p-0">
-              <SheetHeader className="border-b border-slate-100 px-6 py-5 pr-14 pt-[max(1.25rem,env(safe-area-inset-top))]">
-                <SheetTitle className="sr-only">Navigation</SheetTitle>
-                <SheetDescription className="sr-only">
-                  Site sections
-                </SheetDescription>
-                <Image
-                  src="/tops-logo.png"
-                  alt="TOPS Technologies"
-                  width={140}
-                  height={32}
-                  className="h-7 w-auto object-contain"
-                />
-              </SheetHeader>
-
-              <nav
-                className="flex flex-col gap-1 px-3 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]"
-                aria-label="Mobile"
-              >
-                {navLinks.map((link) => (
-                  <SheetClose asChild key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="flex min-h-12 items-center rounded-xl px-3 text-[15px] font-semibold text-slate-700 transition hover:bg-[#49A5FF]/10 hover:text-[#1F7DD9]"
-                      onClick={() => setOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </SheetClose>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
+          {/* Decorative menu icon — visible on mobile/tablet, not clickable */}
+          <span
+            aria-hidden
+            className="pointer-events-none inline-flex h-11 w-11 select-none items-center justify-center rounded-full border border-slate-200/80 bg-white/80 text-[#174D8C] shadow-sm backdrop-blur-md lg:hidden"
+          >
+            <List size={22} weight="bold" />
+          </span>
         </div>
       </div>
     </motion.header>

@@ -246,7 +246,7 @@ export function QuizPage() {
       <QuizAtmosphere />
 
       <div className="relative z-40 shrink-0 bg-transparent">
-        <Navbar title="AI Persona Quiz" />
+        <Navbar title="AI Business Persona" />
       </div>
 
       <main className="relative z-10 flex min-h-0 w-full flex-1 flex-col items-center lg:overflow-hidden">
